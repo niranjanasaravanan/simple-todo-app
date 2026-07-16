@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            Todo
+        </title>
+        <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 28px 24px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        h3 {
+            margin-top: 24px;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 16px;
+            border-top: 1px solid #eee;
+            padding-top: 16px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        #addtask {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #addtask:focus {
+            border-color: #6a82fb;
+        }
+
+        #submit {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #6a82fb;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #submit:hover {
+            background: #5468d6;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #todoList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f7f8fc;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+        }
+
+        #todoList li button {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        #todoList li button:hover {
+            color: #6a82fb;
+        }
+
+        #done li {
+            background: #eafbea;
+            color: #2e7d32;
+            text-decoration: line-through;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+    </style>
+    </head>
+    <body>
+       <div class="container">
+        <h2>Todo List</h2>
+
+        <div class="input-row">
+            <input id="addtask" type="text" placeholder="Add a new task...">
+            <button id="submit">Add</button>
+        </div>
+
+        <ul id="todoList"></ul>
+        <P>// Add and click the task to mark as completed</P>
+
+        <h3>Completed</h3>
+        <ul id="done"></ul>
+    </div>
+    </body>
+    <script>
+        let submit=document.getElementById("submit");
+        let addtask=document.getElementById('addtask');
+        let todo=document.getElementById('todoList');
+        let done=document.getElementById("done");
+        let list=new Array();
+        submit.addEventListener('click',(event)=>{
+            list.push(addtask.value);
+            todo.innerHTML+='<li id="'+(list.length-1)+'"><button onclick="completed('+(list.length-1)+')">'+addtask.value+'</button></li>';
+            addtask.value="";
+             
+        });
+
+        function completed(id)
+        {
+            done.innerHTML+='<li>'+list[id]+'</li>';
+            document.getElementById(id).style.display="none";
+        }
+       
+    </script>
+</html>
